@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Sombra exterior -->
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="16dp" />
+            <solid android:color="@color/neo_shadow_dark" />
+        </shape>
+    </item>
+    <!-- Superficie principal -->
+    <item android:top="4dp" android:left="4dp" android:right="8dp" android:bottom="8dp">
+        <shape android:shape="rectangle">
+            <corners android:radius="16dp" />
+            <solid android:color="@color/neo_surface" />
+        </shape>
+    </item>
+    <!-- Sombra interior -->
+    <item android:top="6dp" android:left="6dp" android:right="10dp" android:bottom="10dp">
+        <shape android:shape="rectangle">
+            <corners android:radius="14dp" />
+            <stroke android:width="1dp" android:color="@color/neo_shadow_light" />
+        </shape>
+    </item>
+</layer-list>
+

@@ -1,0 +1,112 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.TensiGuard" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/accent_coral</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimaryContainer">@color/neo_surface</item>
+        <item name="colorOnPrimaryContainer">@color/text_primary</item>
+        <item name="colorSecondary">@color/accent_blue</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="colorSurface">@color/neo_background</item>
+        <item name="colorOnSurface">@color/text_primary</item>
+        <item name="android:windowBackground">@color/neo_background</item>
+    </style>
+
+    <style name="Theme.TensiGuard" parent="Base.Theme.TensiGuard" />
+
+    <!-- Estilos para elementos neomórficos -->
+    <style name="NeoCard" parent="Widget.Material3.CardView.Elevated">
+        <item name="cardBackgroundColor">@color/neo_surface</item>
+        <item name="cardCornerRadius">20dp</item>
+        <item name="cardElevation">8dp</item>
+        <item name="android:layout_margin">16dp</item>
+    </style>
+
+    <style name="NeoButton" parent="Widget.Material3.Button">
+        <item name="android:background">@drawable/neo_button_background</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_margin">8dp</item>
+        <item name="android:minHeight">56dp</item>
+    </style>
+
+    <style name="NeoEditText" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="android:background">@drawable/neo_edittext_background</item>
+        <item name="boxStrokeWidth">0dp</item>
+        <item name="boxStrokeWidthFocused">0dp</item>
+        <item name="android:layout_margin">8dp</item>
+    </style>
+
+    <style name="NeoTitle">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_margin">16dp</item>
+    </style>
+
+    <style name="NeoSubtitle">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/text_secondary</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_margin">8dp</item>
+    </style>
+
+    <!-- Estilos personalizados faltantes -->
+    <style name="ToolbarStyle" parent="Widget.Material3.Toolbar">
+        <item name="android:background">@color/accent_coral</item>
+        <item name="titleTextColor">@color/white</item>
+        <item name="android:elevation">4dp</item>
+    </style>
+
+    <style name="TitleText">
+        <item name="android:textSize">28sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_margin">24dp</item>
+    </style>
+
+    <style name="TutorialButton" parent="Widget.Material3.Button">
+        <item name="android:background">@drawable/neo_button_background</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:layout_margin">16dp</item>
+        <item name="backgroundTint">@color/accent_blue</item>
+    </style>
+
+    <style name="ClassificationText">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">16dp</item>
+    </style>
+
+    <style name="PressureValueText">
+        <item name="android:textSize">32sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/accent_coral</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">12dp</item>
+    </style>
+
+    <style name="SubtitleText">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/text_secondary</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_margin">12dp</item>
+    </style>
+
+    <style name="EmergencyButton" parent="Widget.Material3.Button">
+        <item name="android:background">@drawable/neo_button_background</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:minHeight">56dp</item>
+        <item name="android:layout_margin">8dp</item>
+        <item name="backgroundTint">#FF4444</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+</resources>
