@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Colores principales para diseño neomórfico -->
+    <color name="neo_background">#F0F0F3</color>
+    <color name="neo_surface">#FFFFFF</color>
+    <color name="neo_shadow_dark">#D1D9E6</color>
+    <color name="neo_shadow_light">#FFFFFF</color>
+
+    <!-- Colores para presión arterial -->
+    <color name="pressure_normal">#4CAF50</color>
+    <color name="pressure_elevated">#FF9800</color>
+    <color name="pressure_high">#F44336</color>
+    <color name="pressure_crisis">#9C27B0</color>
+    <color name="pressure_low">#2196F3</color>
+
+    <!-- Colores de acento -->
+    <color name="accent_coral">#FF6B7A</color>
+    <color name="accent_blue">#5A7BA8</color>
+    <color name="primary_color">#5A7BA8</color>
+    <color name="background_color">#F0F0F3</color>
+    <color name="text_primary">#2C3E50</color>
+    <color name="text_secondary">#7F8C8D</color>
+    <color name="emergency_red">#E74C3C</color>
+
+    <!-- Colores del sistema -->
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- Colores del tema Material Design -->
+    <color name="primary">#5A7BA8</color>
+    <color name="primary_variant">#3F5A7D</color>
+    <color name="secondary">#FF6B7A</color>
+    <color name="secondary_variant">#E85A68</color>
+</resources>

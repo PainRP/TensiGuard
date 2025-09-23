@@ -1,0 +1,73 @@
+<resources>
+    <string name="app_name">TensiGuard</string>
+
+    <!-- Pantalla de bienvenida -->
+    <string name="welcome_title">¡Bienvenido a TensiGuard!</string>
+    <string name="welcome_subtitle">Tu compañero para monitorear la presión arterial</string>
+    <string name="personal_data_title">Datos Personales</string>
+    <string name="name_hint">Nombre completo</string>
+    <string name="weight_hint">Peso (kg)</string>
+    <string name="height_hint">Altura (cm)</string>
+    <string name="gender_male">Masculino</string>
+    <string name="gender_female">Femenino</string>
+    <string name="btn_continue">Continuar</string>
+
+    <!-- Pantalla principal -->
+    <string name="main_title">Registro de Presión</string>
+    <string name="systolic_hint">Presión sistólica</string>
+    <string name="diastolic_hint">Presión diastólica</string>
+    <string name="circumstances_hint">Circunstancias (opcional)</string>
+    <string name="btn_analyze">Analizar Presión</string>
+    <string name="btn_tutorial">!</string>
+
+    <!-- Pantalla de resultados -->
+    <string name="results_title">Resultados del Análisis</string>
+    <string name="classification_title">Clasificación</string>
+    <string name="recommendations_title">Recomendaciones de IA</string>
+    <string name="btn_emergency">Llamada de Emergencia</string>
+    <string name="btn_back">Volver</string>
+    <string name="emergency_warning">¡Presión en nivel crítico!</string>
+
+    <!-- Pantalla de historial -->
+    <string name="history_title">Historial de Presión</string>
+    <string name="empty_history">No hay registros de presión arterial.\n\n¡Comienza registrando tu primera lectura!</string>
+
+    <!-- Tutorial -->
+    <string name="tutorial_title">Tutorial - TensiGuard</string>
+    <string name="btn_close">Cerrar</string>
+
+    <!-- Navegación -->
+    <string name="navigation_drawer_open">Abrir menú</string>
+    <string name="navigation_drawer_close">Cerrar menú</string>
+    <string name="nav_home">Inicio</string>
+    <string name="nav_history">Historial</string>
+    <string name="nav_tutorial">Tutorial</string>
+
+    <!-- Clasificaciones de presión -->
+    <string name="pressure_normal">Normal ✅</string>
+    <string name="pressure_elevated">Elevada ⚠️</string>
+    <string name="pressure_high_1">Hipertensión Etapa 1 🔸</string>
+    <string name="pressure_high_2">Hipertensión Etapa 2 🔶</string>
+    <string name="pressure_crisis">Crisis Hipertensiva 🚨</string>
+    <string name="pressure_low">Presión Baja 📉</string>
+    <string name="unclassified">Unclassified</string> <!-- Added string -->
+
+    <!-- Mensajes de error -->
+    <string name="error_empty_fields">Por favor, completa todos los campos</string>
+    <string name="error_invalid_pressure">Valores de presión inválidos</string>
+    <string name="error_diastolic_higher">La presión diastólica no puede ser mayor que la sistólica</string>
+    <string name="error_network">Error de conexión. Verifica tu internet</string>
+    <string name="error_api">Error al analizar los datos</string>
+
+    <!-- Formatos -->
+    <string name="pressure_format">%1$d/%2$d mmHg</string>
+    <string name="date_format">dd/MM/yyyy</string>
+    <string name="time_format">HH:mm</string>
+    <string name="recorded_at">Registrado el %1$s a las %2$s</string>
+
+    <!-- Estados de carga -->
+    <string name="loading">Cargando...</string>
+    <string name="analyzing">Analizando...</string>
+    <string name="saving">Guardando...</string>
+    <string name="no_records">No hay registros</string>
+</resources>

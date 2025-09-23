@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/neo_background"
+    android:fillViewport="true"
+    tools:context=".ResultActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Toolbar -->
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/neo_background"
+            android:theme="@style/ToolbarStyle"
+            app:title="@string/results_title" />
+
+        <!-- Contenido principal -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <!-- Card de clasificación -->
+            <androidx.cardview.widget.CardView
+                style="@style/NeoCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="24dp"
+                    android:gravity="center">
+
+                    <!-- Clasificación -->
+                    <TextView
+                        android:id="@+id/tv_classification"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Normal ✅"
+                        style="@style/ClassificationText"
+                        android:layout_marginBottom="16dp" />
+
+                    <!-- Valores de presión -->
+                    <TextView
+                        android:id="@+id/tv_pressure_values"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="120/80 mmHg"
+                        style="@style/PressureValueText"
+                        android:layout_marginBottom="8dp" />
+
+                    <!-- Fecha y hora -->
+                    <TextView
+                        android:id="@+id/tv_timestamp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Registrado el 12/09/2024 a las 14:30"
+                        android:textSize="14sp"
+                        android:textColor="@color/text_secondary"
+                        android:gravity="center" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <!-- Card de recomendaciones de IA -->
+            <androidx.cardview.widget.CardView
+                style="@style/NeoCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="24dp">
+
+                    <!-- Título de recomendaciones -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/recommendations_title"
+                        style="@style/SubtitleText"
+                        android:layout_marginBottom="16dp" />
+
+                    <!-- Reporte de IA -->
+                    <TextView
+                        android:id="@+id/tv_ai_report"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Cargando análisis..."
+                        android:textSize="16sp"
+                        android:textColor="@color/text_primary"
+                        android:lineSpacingExtra="4dp"
+                        android:justificationMode="inter_word" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <!-- Card de emergencia (visible solo si es necesario) -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_emergency"
+                style="@style/NeoCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="24dp"
+                    android:gravity="center">
+
+                    <!-- Advertencia de emergencia -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/emergency_warning"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/emergency_red"
+                        android:gravity="center"
+                        android:layout_marginBottom="16dp" />
+
+                    <!-- Botón de emergencia -->
+                    <Button
+                        android:id="@+id/btn_emergency_call"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:text="@string/btn_emergency"
+                        style="@style/EmergencyButton"
+                        android:drawablePadding="8dp" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <!-- Botón volver -->
+            <Button
+                android:id="@+id/btn_back"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:text="@string/btn_back"
+                style="@style/NeoButton"
+                android:layout_marginTop="16dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>
