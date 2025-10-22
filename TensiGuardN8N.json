@@ -1,0 +1,422 @@
+{
+  "name": "My workflow 3",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "e9836a7b-84c8-4c9a-b454-ac48b20d5184",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        80,
+        352
+      ],
+      "id": "104831a8-3266-4b6b-9c47-206d414c1a40",
+      "name": "Webhook",
+      "webhookId": "e9836a7b-84c8-4c9a-b454-ac48b20d5184"
+    },
+    {
+      "parameters": {
+        "chatId": "=1975872554",
+        "text": "=🚨 *¡ALERTA DE EMERGENCIA TENSIGUARD!* 🚨  El paciente *{{ $json.nombre }}* ha registrado una: **Clasificación:*{{ $json.nivel }}*  **Valores de Presión:** - Sistólica:{{ $json.sistolica }} - Diastólica: {{ $json.diastolica }}  **Hora:**{{ $json.fecha }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        2128,
+        304
+      ],
+      "id": "e117b368-d71e-4f72-a6b6-fad802cd2f83",
+      "name": "Send a text message",
+      "webhookId": "45250404-8d23-426a-ae3d-2ef3cfdb3377",
+      "credentials": {
+        "telegramApi": {
+          "id": "AFnMPQhiJPvQFBQj",
+          "name": "TENSIGUARD"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "0678ba44-ca59-4877-82cb-5170008d11c2",
+      "name": "Telegram Trigger",
+      "webhookId": "1a1a2deb-cd3c-49c7-98b5-69851472ad5c",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "jsCode": "const s = $json.sistolica;\nconst d = $json.diastolica;\nlet nivel = \"Normal\";\n\nif (s >= 180 || d >= 120) nivel = \"Crisis Hipertensiva 🚨\";\nelse if (s >= 160 || d >= 100) nivel = \"Hipertensión Etapa 2\";\nelse if (s >= 140 || d >= 90) nivel = \"Hipertensión Etapa 1\";\nelse if (s >= 130 || d >= 85) nivel = \"Elevada\";\n\n// Obtener el correo desde el nodo anterior (Get row(s) in sheet1)\nconst rows = $input.first().json.rows || [];\nconst doctorEmail = rows[0]?.correo || $('Webhook').first().json.body.doctorEmail; // valor por defecto\n\nconst texto = `\n🩺 *Reporte TensiGuard - ${$json.nombre}*\n---------------------------------\n📅 Fecha: ${$json.fecha}\n🧍‍♂️ Género: ${$json.genero}\n⚖️ Peso: ${$json.peso} kg\n📏 Altura: ${$json.altura} cm\n\n💓 Presión actual: *${s}/${d} mmHg*\n📊 Clasificación: *${nivel}*\n📖 Circunstancia: ${$json.circunstancia}\n\n🧠 Análisis IA:\n${$json.reporte_ai}\n\n⚠️ Médico asignado: ${$json.medico_asignado || \"No especificado\"}\n`;\n\nreturn [{\n  json: {\n    texto,\n    nivel,\n    nombre: $json.nombre,\n    sistolica: s,\n    diastolica: d,\n    fecha: $json.fecha,\n    medico_asignado: $json.medico_asignado,\n    telegram_chat_id: $json.telegram_chat_id || \"5321589234\",\n    doctorEmail // ahora sí se enviará correctamente\n  }\n}];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1088,
+        272
+      ],
+      "id": "79b28ac5-d8b4-4f59-9db1-89a54844c5b9",
+      "name": "Code in JavaScript1"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "472740ec-723a-47ff-ad58-3bd21c6a3c02",
+              "leftValue": "={{ $('Webhook').item.json.body.systolic }}",
+              "rightValue": 160,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            },
+            {
+              "id": "80c02931-f03f-412e-b7f6-fcc8ea0cd81f",
+              "leftValue": "={{ $('Webhook').item.json.body.diastolic }}",
+              "rightValue": 100,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        688,
+        304
+      ],
+      "id": "d019210d-52d5-4bd6-bfba-f2ac834c14c1",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1Uk-Cn3NZQAToOSQIjzmkt2rzsWcdfMEYd0o5C_SWKJ8",
+          "mode": "list",
+          "cachedResultName": "Registros",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Uk-Cn3NZQAToOSQIjzmkt2rzsWcdfMEYd0o5C_SWKJ8/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 594858981,
+          "mode": "list",
+          "cachedResultName": "registros",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Uk-Cn3NZQAToOSQIjzmkt2rzsWcdfMEYd0o5C_SWKJ8/edit#gid=594858981"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id_paciente": "={{ $json.body.userName }}",
+            "nombre": "={{ $json.body.userName }}",
+            "sistolica": "={{ $json.body.systolic }}",
+            "diastolica": "={{ $json.body.diastolic }}",
+            "actividad": "={{ $json.body.circumstances }}",
+            "fecha": "={{ $json.body.timestamp }}",
+            "correo": "={{ $json.body.doctorEmail }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "id_paciente",
+              "displayName": "id_paciente",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "nombre",
+              "displayName": "nombre",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "sistolica",
+              "displayName": "sistolica",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "diastolica",
+              "displayName": "diastolica",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "actividad",
+              "displayName": "actividad",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "fecha",
+              "displayName": "fecha",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "correo",
+              "displayName": "correo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        288,
+        352
+      ],
+      "id": "574c2659-9716-4fb6-9482-98ea04c22b90",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "ubSUmFNWrrFfZBLW",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1Uk-Cn3NZQAToOSQIjzmkt2rzsWcdfMEYd0o5C_SWKJ8",
+          "mode": "list",
+          "cachedResultName": "Registros",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Uk-Cn3NZQAToOSQIjzmkt2rzsWcdfMEYd0o5C_SWKJ8/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 594858981,
+          "mode": "list",
+          "cachedResultName": "registros",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Uk-Cn3NZQAToOSQIjzmkt2rzsWcdfMEYd0o5C_SWKJ8/edit#gid=594858981"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "nombre",
+              "lookupValue": "={{ $('Append row in sheet').item.json.id_paciente }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        896,
+        272
+      ],
+      "id": "8d756e23-fda3-471d-a4b5-ef127e55fb61",
+      "name": "Get row(s) in sheet1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "ubSUmFNWrrFfZBLW",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Obtenemos los datos del nodo anterior (Google Sheets)\nconst rows = items[0].json.rows || [];\n\n// Si no hay filas, devolvemos un mensaje indicando que no hay historial\nif (rows.length === 0) {\n  return [{\n    json: {\n      mensaje: \"No se encontraron registros previos para este paciente.\"\n    }\n  }];\n}\n\n// Convertimos las filas a objetos limpios\nconst historial = rows.map(row => ({\n  id_lectura: row.id_paciente || row.nombre,\n  nombre: row.nombre,\n  peso: row.peso || \"N/A\",\n  altura: row.altura || \"N/A\",\n  genero: row.genero || \"N/A\",\n  sistolica: parseInt(row.sistolica) || 0,\n  diastolica: parseInt(row.diastolica) || 0,\n  clasificacion: row.clasificacion || \"No definida\",\n  fecha: row.fecha\n}));\n\n// Devolvemos cada registro como un item\nreturn historial.map(item => ({ json: item }));"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        976,
+        0
+      ],
+      "id": "d1433a2b-6f66-49ed-a010-c16a0831b8ec",
+      "name": "filtrar ultimos 7 dias",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "0dfb5278-fca1-4995-9a94-6448506da90f",
+              "name": "={   \"nombre\": \"={{ $json.nombre }}\",   \"sistolica\": \"={{ $json.sistolica }}\",   \"diastolica\": \"={{ $json.diastolica }}\",   \"classification\": \"={{ $('Webhook').item.json.body.circumstances }}\",   \"timestamp\": \"={{ $('Webhook').item.json.body.timestamp }}\",   \"circumstances\": \"={{ $('Webhook').item.json.body.circumstances }}\",   \"doctorEmail\": \"={{ $('Webhook').item.json.body.doctorEmail }}\" }",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "33037f0e-c81a-4cd7-9094-2aece10e02db",
+              "name": "doctorEmail\n",
+              "value": "={{ $json.correo }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        496,
+        352
+      ],
+      "id": "211e16d5-7896-46fd-9287-5bf89a2d96c8",
+      "name": "Set - Datos del paciente"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.doctorEmail }}",
+        "subject": "ATENCION CLIENTE POSIBLE EN CAMINO",
+        "message": "=🚨 *¡ALERTA DE EMERGENCIA TENSIGUARD!* 🚨  El paciente *{{ $json.nombre }}* ha registrado una: **Clasificación:*{{ $json.nivel }}*  **Valores de Presión:** - Sistólica:{{ $json.sistolica }} - Diastólica: {{ $json.diastolica }}  **Hora:**{{ $json.fecha }} estar atento ya que posiblemente este aapunto de contactar con servicio al cliente o con usted doctor \n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        1744,
+        144
+      ],
+      "id": "f60e6509-7c34-4ef2-b342-3c58f7c130a0",
+      "name": "Send a message",
+      "webhookId": "d9ae26b5-764d-4d37-912d-9687426a0ef4",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "drxo7PVs7wACJX9L",
+          "name": "Gmail account 2"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript1": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Set - Datos del paciente",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet1": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set - Datos del paciente": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "29044196-0f9e-4c25-8a96-b019f6456815",
+  "meta": {
+    "instanceId": "911df541b03c815f845ec15d556bfd618c3acea746f57f31f245e46d21397ae6"
+  },
+  "id": "ZgChqCWoTl1GDHeQ",
+  "tags": []
+}
