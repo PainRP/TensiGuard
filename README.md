@@ -2,6 +2,24 @@
 
 TensiGuard es una aplicación móvil Android diseñada para el monitoreo y análisis de la presión arterial utilizando inteligencia artificial a través de la API de Gemini.
 
+---
+
+## 🖼️ Capturas de Pantalla
+
+| Pantalla de Bienvenida | Registro de Presión | Historial |
+|------------------------|----------------------|-----------|
+| ![Pantalla de bienvenida](screenshots/Pantalla%20de%20bienvenida.png) | ![Registro de presión](screenshots/Registro%20de%20presión.png) | ![Historial](screenshots/historial.png) |
+
+| Resultados de Análisis | Configuración | Modo Noche |
+|------------------------|----------------|-------------|
+| ![Resultados de análisis](screenshots/Resultados%20de%20analisis.png) | ![Configuración](screenshots/Configuración.png) | ![Modo noche](screenshots/Modo%20noche.png) |
+
+| Barra de Navegación | Tutorial |
+|---------------------|----------|
+| ![navbar](screenshots/navbar.png) | ![tutorial](screenshots/tutorial.png) |
+
+---
+
 ## Características Principales
 
 - Registro y monitoreo de presión arterial
